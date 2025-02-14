@@ -15,9 +15,6 @@ fn into_output_config(r: SupportedStreamConfigRange) -> Option<SupportedStreamCo
     if r.channels() != 1 {
         return None;
     }
-    if r.sample_format() != SampleFormat::F32 {
-        return None;
-    }
     r.try_with_sample_rate(SampleRate(SAMPLE_RATE))
 }
 
