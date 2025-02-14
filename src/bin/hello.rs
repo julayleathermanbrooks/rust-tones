@@ -2,10 +2,7 @@ use std::f32::consts::PI;
 
 use cpal::{
     traits::{DeviceTrait, HostTrait, StreamTrait},
-    SampleFormat,
-    SampleRate,
-    SupportedStreamConfig,
-    SupportedStreamConfigRange,
+    SampleRate, SupportedStreamConfig, SupportedStreamConfigRange,
 };
 
 const SAMPLE_RATE: u32 = 48_000;
@@ -38,12 +35,9 @@ fn main() {
         t = (t + data.len() as f32 / SAMPLE_RATE as f32) % (2.0 * PI);
     };
 
-    let stream = device.build_output_stream(
-        &config,
-        sine_samples,
-        |e| panic!("{}", e),
-        None,
-    ).unwrap();
+    let stream = device
+        .build_output_stream(&config, sine_samples, |e| panic!("{}", e), None)
+        .unwrap();
     stream.play().unwrap();
 
     std::thread::sleep(std::time::Duration::from_millis(1000));
